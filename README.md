@@ -25,4 +25,4 @@ Stay tuned for further support for the Windows platform.
 
 Find the full details here:
 [EUROSYS17] "Eleos: Exit-Less OS Services for  SGX Enclaves" 
-M. Orenbach, M. Minkin, P. Lifshits, M. Silberstei
+M. Orenbach, M. Minkin, P. Lifshits, M. Silberstein
