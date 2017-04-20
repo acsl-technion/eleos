@@ -1,4 +1,4 @@
-# eleos
+# Eleos
 ExitLess Services for SGX Enclaves
 
 Tested on Ubuntu 14.04 64 bit.
@@ -21,3 +21,8 @@ face_verification_server - face verification workload from the paper
 suvm_read_write_sample - suvm benchmarks from the paper
 
 Stay tuned for further support for the Windows platform.
+
+
+Find the full details here:
+[EUROSYS17] "Eleos: Exit-Less OS Services for  SGX Enclaves" 
+M. Orenbach, M. Minkin, P. Lifshits, M. Silberstei
