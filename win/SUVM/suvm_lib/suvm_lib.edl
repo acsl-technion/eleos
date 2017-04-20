@@ -1,0 +1,11 @@
+enclave {
+    trusted {
+        /* define ECALLs here. */
+			public int ecall_lib_initialize([user_check]void* pool_ptr, size_t pool_size);						
+    };
+
+    untrusted {
+        /* define OCALLs here. */
+		void ocall_debug([in, string] const char *str);
+    };
+};

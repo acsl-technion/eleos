@@ -1,0 +1,19 @@
+enclave {
+    from "sgx_tstdc.edl" import *;
+	from "../suvm_lib/suvm_lib.edl" import *;
+
+    trusted {
+        /* define ECALLs here. */
+		public int ecall_train_server([user_check] void* arg1, [user_check] void* arg2);
+    	public int ecall_open_server();
+    };
+
+    untrusted {
+        /* define OCALLs here. */
+		int ocall_readfile([out,size=__nbytes] char *__buf, size_t __nbytes);
+		int ocall_FindFirstFile();
+		int ocall_FindNextFile();
+		int ocall_FindClose();
+		unsigned char* ocall_GetKey();
+    };
+};

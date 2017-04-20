@@ -1,0 +1,15 @@
+enclave {
+    from "sgx_tstdc.edl" import *;
+	from "../suvm_lib/suvm_lib.edl" import *;
+
+    trusted {
+        /* define ECALLs here. */
+		public int ecall_test_suvm();
+		public int ecall_test_sgx();
+    };
+
+    untrusted {
+        /* define OCALLs here. */
+
+    };
+};
