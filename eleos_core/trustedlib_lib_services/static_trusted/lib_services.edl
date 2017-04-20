@@ -1,0 +1,21 @@
+/* lib_services.edl - Top EDL file. */
+
+enclave {
+    
+    untrusted {
+            void ocall_debug([in, string] const char *str);
+            void ocall_create_swap_thread();
+    };
+
+    trusted {
+    	    public int ecall_lib_initialize([user_check]void* pool_ptr, 
+    	    								 size_t pool_size, 
+    	    								 [user_check]void* queue,
+											 [user_check]unsigned char** ptr_to_pin,
+											 [user_check]unsigned long* size_to_pin, 
+											  [user_check]unsigned long long * untrusted_counters);
+
+
+			public void ecall_erase_aptr_pcache(int num_entries);
+    };
+};

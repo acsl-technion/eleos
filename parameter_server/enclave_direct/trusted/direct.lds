@@ -1,0 +1,9 @@
+direct.so
+{
+    global:
+        g_global_data_sim;
+        g_global_data;
+        direct_entry;
+    local:
+        *;
+};

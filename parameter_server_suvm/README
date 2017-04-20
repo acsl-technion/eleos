@@ -1,0 +1,13 @@
+This tests a simple kvs implementing arithmetic operations updates for given requests from a client.
+This server acts as a simulation of a parameter server worker node used for 'ML like-tasks'.
+The outputs is the latency took to answer <N> requests from clients.
+
+This parameter server was linked with eleos-suvm. For best performance use DIRECT_ACCESS to the backing store due to the use of small item sizes.
+
+To test this server one should:
+./sample 0 8 0 0 - Tests enclave
+./sample 1 8 0 0 - Tests non-enclave
+./sample 0 8 1 0 - Tests RPC
+
+ Start a client generator(look at its readme, basically the command listed below):
+./client 8 0 0 [CACHE_SIZE] - This option will actually measure different cache sizes without needing to recompile and stuff.

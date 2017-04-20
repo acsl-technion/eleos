@@ -1,0 +1,3 @@
+This project has two objectives:
+1. Provide easy examples for usage of suvm memory allocation and suvm secured pointers (Aptr) usage.
+2. Test functionality isn't broken when introducing changes to SUVM infrastructure.

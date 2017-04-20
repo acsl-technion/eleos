@@ -1,0 +1,24 @@
+/* samples.edl - Top EDL file. */
+
+enclave {
+    
+	from "/home/user/dev/eleos/eleos_core/trustedlib_lib_services/static_trusted/lib_services.edl" import *;
+    
+    /* 
+     * ocall_samples_sample - invokes OCALL to display string buffer inside the enclave.
+     *  [in]: copy the string buffer to App outside.
+     *  [string]: specifies 'str' is a NULL terminated buffer.
+     */
+    untrusted {
+        void ocall_printf([in, string] const char *str);
+        int ocall_open([in, string] const char* filename, int mode);
+        int ocall_read(int file, [out, size=size] void *buf, unsigned int size);
+        int ocall_write(int file, [in, size=size] void *buf, unsigned int size);
+        void ocall_close(int file);
+    };
+
+
+    trusted {
+    	    public int ecall_samples_sample([user_check] void* pool_ptr);
+    };
+};

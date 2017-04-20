@@ -1,0 +1,15 @@
+this program needs the color FERET dataset
+
+download:
+Get the colorferet dataset from: https://www.nist.gov/itl/iad/image-group/color-feret-database (wget)
+
+untar:
+tar xzf colorferet.tar
+
+preprocess:
+./convert_images.sh
+
+The code expects the preprocessed dataset to be in the same folder as the executable with a dir named: "images_raw". Create a symlink to it from the file system.
+
+You can then run the server with: ./sample [-l]
+For running with different configurations (#Threads\Use SUVM\Use RPC see defines in the code).

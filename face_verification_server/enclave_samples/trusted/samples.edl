@@ -1,0 +1,86 @@
+/* samples.edl - Top EDL file. */
+
+enclave {
+    
+	from "/home/user/dev/eleos/eleos_core/trustedlib_lib_services/static_trusted/lib_services.edl" import *;
+    
+    /* 
+     * ocall_samples_sample - invokes OCALL to display string buffer inside the enclave.
+     *  [in]: copy the string buffer to App outside.
+     *  [string]: specifies 'str' is a NULL terminated buffer.
+     */
+    untrusted {
+          include "../my_types_u.h"
+      
+        void ocall_samples_sample([in, string] const char *str);
+        
+        
+        /* SQLITE OCALLS START */
+          
+        void* ocall_dlsym ([user_check] void * __handle, [in,string] const char * __name);
+        int ocall_dlclose ([user_check] void *__handle);
+        void* ocall_dlopen ([in,string] const char *__file, int __mode);
+		char* ocall_dlerror (void);
+		char* ocall_getenv ([in,string] const char *__name);
+		int ocall_fsync (int __fd);
+		__pid_t ocall_getpid (void);
+		__off_t ocall_lseek (int __fd, __off_t __offset, int __whence);
+		unsigned int ocall_sleep (unsigned int __seconds);
+		
+		int ocall_gettimeofday ([out]struct timeval* __tv, __timezone_ptr_t __tz);
+		time_t ocall_time ([out] time_t *__timer);
+		long int ocall_sysconf (int __name);
+		int ocall_sislnk(__mode_t m);
+		int ocall_sisdir(__mode_t m);
+		int ocall_utimes ([in,string] const char *__file); // other parameter is always null for sqlite
+		
+		int ocall_access ([in,string] const char *__name, int __type);
+		int ocall_close (int __fd);
+		
+		int ocall_fchmod (int __fd, __mode_t __mode);
+		int ocall_unlink ([in,string] const char *__name);
+		int ocall_mkdir ([in,string] const char *__path, __mode_t __mode);
+		int ocall_rmdir ([in,string] const char *__path);
+		int ocall_fchown (int __fd, __uid_t __owner, __gid_t __group);
+ 		char* ocall_getcwd ([user_check] char *__buf, size_t __size);
+ 		int ocall_ftruncate (int __fd, __off_t __length);
+ 		ssize_t ocall_read (int __fd, [out,size=__nbytes] void *__buf, size_t __nbytes);
+		__uid_t ocall_geteuid (void);
+ 		void* ocall_mmap ([user_check] void *__addr, size_t __len, int __prot, int __flags, int __fd, __off_t __offset);
+ 		int ocall_munmap ([user_check] void *__addr, size_t __len);
+ 		ssize_t ocall_readlink ([in,string] const char* __path, [out] char* __buf, size_t __len);
+ 		ssize_t ocall_write (int __fd, [in,size=__n] const void *__buf, size_t __n);
+ 		int ocall_stat ([in,string] const char* __file, [out] struct stat* __buf);
+ 		int ocall_lstat ([in,string] const char* __file, [out] struct stat* __buf);
+ 		int ocall_fstat (int __fd, [out] struct stat *__buf);
+		void *ocall_mremap ([user_check] void *__addr, size_t __old_len, size_t __new_len, int __flags);
+ 		int ocall_fcntl (int __fd, int __cmd);		
+ 		int ocall_open([in, string] const char *__file, int __oflag);
+ 		int ocall_open1([in, string] const char *__file, int __oflag, mode_t mode);
+ 		
+ 		void* ocall_malloc1(size_t size);
+		void ocall_free1([user_check]void* ptr);
+		void* ocall_realloc1([user_check]void* ptr, size_t size);
+        
+        /* SQLITE OCALLS END  */
+		int ocall_pavel_test(int i);
+                void* ocall_opendir([in,string]const char* name);
+                void* ocall_readdir([user_check]void *dirp);
+		int ocall_setup_server(int port);
+		int ocall_accept(int sockfd);
+		void ocall_dummy();
+    };
+
+
+    trusted {
+    		include "../my_types.h"
+    		
+    	    public int ecall_samples_sample();
+    	    
+    	    public int ecall_evaluate_lib_preprocess(int testId, [user_check] void* arg1, [user_check] void* arg2);
+    	    public int ecall_evaluate_regular_preprocess(int testId, [user_check] void* arg1, [user_check] void* arg2);
+    	    
+    	    public int ecall_evaluate_lib(int testId, [user_check] void* arg);
+    	    public int ecall_evaluate_regular(int testId, [user_check] void* arg);
+    };
+};
