@@ -1,8 +1,8 @@
 /* samples.edl - Top EDL file. */
 
 enclave {
-    
-	from "/home/user/dev/sgx/src/sgx_services/sgx/trustedlib_lib_services/static_trusted/lib_services.edl" import *;
+
+	from "/home/user/dev/eleos/eleos_core/trustedlib_lib_services/static_trusted/lib_services.edl" import *;    
     
     /* 
      * ocall_samples_sample - invokes OCALL to display string buffer inside the enclave.

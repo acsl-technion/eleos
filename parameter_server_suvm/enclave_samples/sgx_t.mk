@@ -44,7 +44,7 @@ endif
 
 Crypto_Library_Name := sgx_tcrypto
 
-services_lib = ../../../sgx_services/sgx/trustedlib_lib_services
+services_lib = ../../eleos_core/trustedlib_lib_services
 
 Samples_Cpp_Files := $(wildcard trusted/*.cpp) $(wildcard trusted/microbenchmarks/*.cpp) $(wildcard trusted/SQlite/*.cpp) $(wildcard trusted/hashmap/*.cpp) $(wildcard trusted/baseline_STLhashmap/*.cpp)
 Samples_C_Files := #$(wildcard trusted/SQlite/*.c)

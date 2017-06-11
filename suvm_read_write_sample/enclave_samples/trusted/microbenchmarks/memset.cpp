@@ -278,11 +278,13 @@ int memset_regular(int arr_size, int item_size, int test_read, int test_write, i
 
 int preprocess_memset_aptr(int arr_size, int item_size)
 {
+
 	g_aptr_arr = (Aptr<int>*)memsys5Malloc( arr_size*sizeof(Aptr<int>));
 	ASSERT(g_aptr_arr);
 
-	int** mem_array = new int*[arr_size];
+	int** mem_array = (int**)malloc(arr_size*sizeof(int*));
 	debug("arr_size = %d\n", arr_size );
+
 	for(int i = 0 ; i < arr_size ; i++) {
 		int* tmpmem=(int*)memsys5Malloc(item_size*sizeof(int));
 		ASSERT(tmpmem);
@@ -302,8 +304,7 @@ int preprocess_memset_aptr(int arr_size, int item_size)
 		g_aptr_arr[i].m_aptr.hint_write = 0;
 	}
 
-	delete[] mem_array;
-
+	free(mem_array);
 	debug("done preprocess_memset_aptr()\n");
 
 	return 0;

@@ -10,7 +10,7 @@
 // First version - can use custom sizes for each item in future...
 #define PAGE_SIZE 4096
 #define EPC_SIZE 134217728 // 128 MB
-//#define CACHE_SIZE is via makefile
+#define CACHE_SIZE (1 << 26) // 64 MB
 #define LLC_CAPACITY 262144 //65536
 #define CACHE_CAPACITY (CACHE_SIZE / PAGE_SIZE)
 #define NONCE_BYTE_SIZE 12

@@ -27,8 +27,6 @@ int test_Aptr_destroy()
 	res &= ptr->m_base_page_index > 0;
 
 	delete ptr;
-	res &= ptr->m_base_page_index < 0;
-
 	memsys5Free(tmp_ptr);
 
 	return res;

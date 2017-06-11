@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include <assert.h>
-#include <SwapUtils.h>
 
 #if defined(__cplusplus)
 extern "C" {

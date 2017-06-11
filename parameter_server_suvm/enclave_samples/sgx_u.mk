@@ -43,7 +43,7 @@ else
 	Urts_Library_Name := sgx_urts
 endif
 
-unrusted_services_lib = ../../../sgx_services/sgx/trustedlib_lib_services
+unrusted_services_lib = ../../eleos_core/trustedlib_lib_services
 
 # App_Cpp_Files := App/App.cpp $(wildcard App/Edger8rSyntax/*.cpp) $(wildcard App/TrustedLibrary/*.cpp)
 App_Cpp_Files := $(UNTRUSTED_DIR)/sample.cpp # $(wildcard App/TrustedLibrary/*.cpp)

@@ -32,7 +32,7 @@ endif
 ifeq ($(SGX_DEBUG), 1)
         SGX_COMMON_CFLAGS += -O0 -g
 else
-        SGX_COMMON_CFLAGS += -O3 -flto -mavx -msse4 -maes
+        SGX_COMMON_CFLAGS += -O3 -mavx -msse4 -maes
 endif
 
 ifneq ($(SGX_MODE), HW)
