@@ -376,11 +376,16 @@ void memsys5FreeUnsafe(void *pOld){
 ** Allocate nBytes of memory.
 */
 void *memsys5Malloc(int nBytes){
+
   void *p = 0;
   if( nBytes>0 ){
+
     memsys5Enter();
+
     p = memsys5MallocUnsafe(nBytes);
+
     memsys5Leave();
+	
   }
   return (void*)p;
 }

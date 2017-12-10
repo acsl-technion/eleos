@@ -102,12 +102,11 @@ class Aptr {
 		m_aptr.offset = ((((__int64_t)ram_ptr - (__int64_t)g_base_pool_ptr)) & PAGE_BITS_MASK) + PAGE_SIZE;
 		m_aptr.page = -1;
 		m_aptr.prm_ptr = (unsigned char**)&DUMMY; // DUMMY VALUE
-		m_aptr.hint_write = false;
+		m_aptr.hint_write = true;
 #ifdef APTR_RANDOM_ACCESS
 		m_aptr.sub_page_index = 0;
 #endif
 		m_base_page_index = ((((__int64_t)ram_ptr - (__int64_t)g_base_pool_ptr)) >> PAGE_SIZE_LOG);
-
 		ASSERT(m_base_page_index >= 0);
 	}
 
@@ -284,5 +283,7 @@ long long get_aptr_range();
 
 void *memmove_aptr_reg(void *dst0, void *src0, size_t length);
 void *memmove_reg_aptr(void *dst0, void *src0, size_t length);
+
+void background_thread_aux();
 
 #endif /* TRUSTEDLIB_LIB_SERVICES_STATIC_TRUSTED_APTR_H_ */

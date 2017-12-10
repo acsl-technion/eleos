@@ -14,6 +14,10 @@
 
 struct item_t
 {
+	/**************prefetcher*******************/
+	char prefetcher_bits=0; //prefetcher'0' '1' '2'
+	/**************prefetcher*******************/
+
         int page_index;
         unsigned char** epc;
 #ifdef APTR_RANDOM_ACCESS
@@ -113,10 +117,12 @@ public:
 
 	// Assuming page cache size smaller than 2^sizeof(int).
         int m_page_cache_size;
+	size_t m_max_cache_size;
 
 	void init(size_t num_of_buckets, size_t backing_store_size, size_t page_cache_size)
 	{
 		m_page_cache_size =0;
+		m_max_cache_size = page_cache_size;
                 m_hashmap_size = num_of_buckets;
                 m_buckets = new bucket[num_of_buckets];
                 for (size_t i=0;i<num_of_buckets;i++)
@@ -174,8 +180,10 @@ public:
 	{
 		// Only evicting pages with ref_count == 0.
 		int page_index = -1;	
+		int num_of_tries = 0;
 		do
 		{
+			//debug("get page to evict\n");
 			page_index = m_used_pages->dequeue();
 		
 	                bucket& bkt = m_buckets[page_index % m_hashmap_size];
@@ -236,7 +244,10 @@ public:
 		if (p == NULL) // no items yet in this bucket
 		{
                         item_t* it = new item_t();
-                        it->page_index = page_index;
+						/**************prefetcher*******************/
+						it->prefetcher_bits='0'; //prefetcher
+						/**************prefetcher*******************/
+							it->page_index = page_index;
                         it->epc = epc_page;
 #ifdef APTR_RANDOM_ACCESS
 			for (int i=0;i<SUB_PAGE_COUNT;i++)
@@ -264,6 +275,9 @@ public:
 			}
 
 			item_t* it = new item_t();
+			/**************prefetcher*******************/
+			it->prefetcher_bits='0'; //prefetcher
+			/**************prefetcher*******************/
 			it->page_index = page_index;
 			it->epc = epc_page;
 			it->next = NULL;			

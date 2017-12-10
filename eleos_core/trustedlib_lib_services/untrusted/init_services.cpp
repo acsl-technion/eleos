@@ -6,7 +6,8 @@
  */
 
 #include <sys/ioctl.h>
-#include <pthread.h>
+#include <pthread.h>                                                         
+#include <signal.h>  
 #include "../common/request.h"
 #include "../common/Queue.h"
 #include "lib_services_u.h"
@@ -30,6 +31,7 @@
 void* pool_ptr;
 void** arr;
 int swap_eid;
+pthread_t  tid =4000;
 
 unsigned long long* g_perf_counters;
 
@@ -71,6 +73,32 @@ void ocall_create_swap_thread()
 
 }
 
+void* background_thread_me(void* arg)
+{
+	ecall_background_thread(swap_eid);
+	return NULL;
+}
+
+void ocall_create_background_thread(){
+	int res = pthread_create(&tid, NULL, background_thread_me, NULL);
+	
+	//pthread_detach(tid);
+	
+	//tid++;
+	if (res)
+	{	printf("failed to make thread\n");
+		exit (-1);
+	}
+}
+
+void ocall_pthread_destroy(){
+	printf("Gonna kill prefetch thread...\n");	
+	int res = pthread_kill( tid, SIGKILL);
+	if (res<0)
+	{	printf("failed to kill thread\n");
+		exit (-1);
+	}
+}
 void* get_pool_ptr_debug()
 {
 	return pool_ptr;
@@ -119,6 +147,6 @@ int cleanup_lib(sgx_enclave_id_t eid)
 
 	free(arr);
 	free(pool_ptr);
-
+	ocall_pthread_destroy();
 	return 0;
 }

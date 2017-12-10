@@ -21,3 +21,8 @@ void ecall_erase_aptr_pcache(int num_entries)
 {
 	remove_entries_pcache(num_entries);
 }
+
+
+void ecall_background_thread(){
+	background_thread_aux();
+}

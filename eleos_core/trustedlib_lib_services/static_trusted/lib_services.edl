@@ -5,6 +5,8 @@ enclave {
     untrusted {
             void ocall_debug([in, string] const char *str);
             void ocall_create_swap_thread();
+	    void ocall_create_background_thread();
+		
     };
 
     trusted {
@@ -16,6 +18,7 @@ enclave {
 											  [user_check]unsigned long long * untrusted_counters);
 
 
-			public void ecall_erase_aptr_pcache(int num_entries);
+	    public void ecall_erase_aptr_pcache(int num_entries);
+	    public void ecall_background_thread();
     };
 };
