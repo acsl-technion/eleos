@@ -7,8 +7,7 @@ Prerequisites:
 1. Intel SGX Driver: https://github.com/01org/linux-sgx-driver
 2. Intel SGX SDK & PSW: https://github.com/01org/linux-sgx
 
-For running memcached:
-1. Graphene with Eleos RPC: Will be made available shortly  
+["Fairly outdated Graphene-SGX POC code is available here"](https://github.com/acsl-technion/graphene/tree/eleos).
 
 Directory structure:
 eleos_core - the exit-less services lib
