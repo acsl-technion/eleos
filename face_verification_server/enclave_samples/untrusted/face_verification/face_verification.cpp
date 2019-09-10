@@ -14,6 +14,70 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
+#include <errno.h>
+
+static void * (* const volatile __memset_vp)(void *, int, size_t)
+    = (memset);
+
+#ifdef memset_s
+#undef memset_s /* in case it was defined as a macro */
+#endif
+
+#ifdef __cplusplus
+extern "C"
+#endif
+int memset_s(void *s, size_t smax, int c, size_t n)
+{
+    int err = 0;
+
+    if (s == NULL) {
+        err = EINVAL;
+        goto out;
+    }
+
+    if (n > smax) {
+        err = EOVERFLOW;
+        n = smax;
+    }
+
+    /* Calling through a volatile pointer should never be optimised away. */
+    (*__memset_vp)(s, c, n);
+
+    out:
+    if (err == 0)
+        return 0;
+    else {
+        errno = err;
+        /* XXX call runtime-constraint handler */
+        return err;
+    }
+}
+
+#ifdef __cplusplus
+extern "C"
+#endif
+int
+consttime_memequal(const void *b1, const void *b2, size_t len)
+{
+        const unsigned char *c1 = (const unsigned char*)b1, *c2 = (const unsigned char*)b2;
+        unsigned int res = 0;
+
+        while (len--)
+                res |= *c1++ ^ *c2++;
+
+        /*
+         * Map 0 to 1 and [1, 256) to 0 using only constant-time
+         * arithmetic.
+         *
+         * This is not simply `!res' because although many CPUs support
+         * branchless conditional moves and many compilers will take
+         * advantage of them, certain compilers generate branches on
+         * certain CPUs for `!res'.
+         */
+        return (1 & ((res - 1) >> 8));
+}
+
+
 #define O_RDONLY 0x0000
 
 #define DUP_NUM 2

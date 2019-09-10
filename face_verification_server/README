@@ -1,7 +1,7 @@
 this program needs the color FERET dataset
 
 download:
-Get the colorferet dataset from: https://www.nist.gov/itl/iad/image-group/color-feret-database (wget)
+Get the colorferet dataset from: https://www.nist.gov/itl/iad/image-group/color-feret-database
 
 untar:
 tar xzf colorferet.tar
@@ -10,6 +10,15 @@ preprocess:
 ./convert_images.sh
 
 The code expects the preprocessed dataset to be in the same folder as the executable with a dir named: "images_raw". Create a symlink to it from the file system.
+That is drop a symlink in the workload_generator directory. Then compile the workload generator via make. This will create
+two exectuables. 
+ - gen_encrypted_dataset: pre-process the images stored in "images_raw" folder into an encrypted binary file called: "encrypted_dataset.txt". This file contains
+requests (histograms+IDs) to be passed to the face verification server.
+ - client: This executable is the one responsible with communicating with the server. It reads the pre-processed encrypted dataset of requests directly to memory
+and can then stress the server to the max.
 
-You can then run the server with: ./sample [-l]
-For running with different configurations (#Threads\Use SUVM\Use RPC see defines in the code).
+To run the server simply run make at the toplevel dir. This will create an executable called "sample" at the directory "enclaves_samples".
+It expects a symlink of the images_raw in the "enclaves_samples" directory as the server reads the images into a database and then compares
+requests made by the workload generator against the ones stored in the database.
+
+For running with different configurations (#Threads\Use SUVM\Use RPC see defines macros in the code).

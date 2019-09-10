@@ -64,7 +64,7 @@ else
 endif
 
 App_Cpp_Flags := $(App_C_Flags) -std=c++11 -fpermissive
-App_Link_Flags := $(SGX_COMMON_CFLAGS) -L$(SGX_LIBRARY_PATH) -l$(Urts_Library_Name) -L$(unrusted_services_lib) -l_services.untrusted -levent -lpthread -lrt -ldl -L/home/user/experiments-meni/graphene-bugfix/graphene/AptrLib/ippcp -lcrypto
+App_Link_Flags := $(SGX_COMMON_CFLAGS) -L$(SGX_LIBRARY_PATH) -l$(Urts_Library_Name) -L$(unrusted_services_lib) -l_services.untrusted -levent -lpthread -lrt -ldl -L$(SGX_SDK)/lib64 -lsgx_tcrypto
 
 ifneq ($(SGX_MODE), HW)
 	App_Link_Flags += -lsgx_uae_service_sim
