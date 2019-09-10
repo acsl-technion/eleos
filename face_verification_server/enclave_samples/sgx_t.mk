@@ -48,7 +48,7 @@ services_lib = ../../eleos_core/trustedlib_lib_services
 
 Samples_Cpp_Files := $(wildcard trusted/*.cpp) $(wildcard trusted/microbenchmarks/*.cpp) $(wildcard trusted/SQlite/*.cpp) $(wildcard trusted/hashmap/*.cpp) $(wildcard trusted/baseline_STLhashmap/*.cpp) $(wildcard trusted/face_verification/*.cpp)
 Samples_C_Files := #$(wildcard trusted/SQlite/*.c)
-Samples_Include_Paths := -IInclude -Itrusted -I$(SGX_SDK)/include -I$(SGX_SDK)/include/tlibc -I$(SGX_SDK)/include/stlport -I$(services_lib)/static_trusted -I$(services_lib)/common
+Samples_Include_Paths := -IInclude -Itrusted -I$(SGX_SDK)/include -I$(SGX_SDK)/include/tlibc -I$(SGX_SDK)/include/libcxx -I$(services_lib)/static_trusted -I$(services_lib)/common
 
 Flags_Just_For_C := -Wno-implicit-function-declaration -std=c11 -DSQLITE_THREADSAFE=0 $(EPCPP_CACHE_SIZE)
 Common_C_Cpp_Flags := $(SGX_COMMON_CFLAGS) -nostdinc -fvisibility=hidden -fpie -fstack-protector $(Samples_Include_Paths) -fno-builtin-printf -fPIC -I.
@@ -60,7 +60,7 @@ Samples_Cpp_Flags := $(Samples_Cpp_Flags)  -fno-builtin-printf -fPIC $(EPCPP_CAC
 Samples_Link_Flags := $(SGX_COMMON_CFLAGS) -Wl,--no-undefined -nostdlib -nodefaultlibs -nostartfiles -L$(SGX_LIBRARY_PATH) -L$(services_lib) \
 	-Wl,--whole-archive -l$(Trts_Library_Name) -Wl,--no-whole-archive \
 	-Wl,--whole-archive -l_services.trusted -Wl,--no-whole-archive \
-	-Wl,--start-group -lsgx_tstdc -lsgx_tstdcxx -l$(Crypto_Library_Name) -l$(Service_Library_Name) -Wl,--end-group \
+	-Wl,--start-group -lsgx_tstdc -lsgx_tcxx -l$(Crypto_Library_Name) -l$(Service_Library_Name) -Wl,--end-group \
 	-Wl,-Bstatic -Wl,-Bsymbolic -Wl,--no-undefined \
 	-Wl,-pie,-eenclave_entry -Wl,--export-dynamic  \
 	-Wl,--defsym,__ImageBase=0 \

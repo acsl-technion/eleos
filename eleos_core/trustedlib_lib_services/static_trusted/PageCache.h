@@ -11,6 +11,7 @@
 
 #include "../common/SyncUtils.h"
 #include "DataStructures.h"
+#include <string.h>
 
 struct item_t
 {

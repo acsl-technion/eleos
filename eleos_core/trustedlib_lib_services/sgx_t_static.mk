@@ -48,7 +48,7 @@ Crypto_Library_Name := sgx_tcrypto
 Lib_services_Cpp_Files := $(wildcard common/*.cpp) $(wildcard static_trusted/*.cpp)
 #lib_services.cpp static_trusted/SyncUtils.cpp 
 Lib_services_C_Files := 
-Lib_services_Include_Paths := -IInclude -ILib_services -I$(SGX_SDK)/include -I$(SGX_SDK)/include/tlibc -I$(SGX_SDK)/include/stlport -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include
+Lib_services_Include_Paths := -IInclude -ILib_services -I$(SGX_SDK)/include -I$(SGX_SDK)/include/tlibc -I$(SGX_SDK)/include/libcxx -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include
 
 Flags_Just_For_C := -Wno-implicit-function-declaration -std=c11
 Common_C_Cpp_Flags := $(SGX_COMMON_CFLAGS) -nostdinc -fvisibility=hidden -fpie -fstack-protector $(Lib_services_Include_Paths) -fno-builtin-printf -fPIC -I. $(EPCPP_CACHE_SIZE) $(RANDOM_ACCESS)

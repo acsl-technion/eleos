@@ -20,10 +20,9 @@
 #include "../common/SyncUtils.h"
 #include "trusted_utils.h"
 #include <sgx_tcrypto.h>
-#include <stlport/unordered_map>
-#include <stlport/list>
 #include "lib_services_t.h"
 #include  <math.h>
+#include <vector>
 
 #include "PageCache.h"
 #include "CryptoCache.h"

@@ -13,7 +13,6 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdio.h>      /* vsnprintf */
-#include <stlport/list>
 
 #include "rpc_ocall.h"
 
