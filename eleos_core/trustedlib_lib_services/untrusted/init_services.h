@@ -18,7 +18,8 @@ void ocall_create_swap_thread();
 void* get_pool_ptr_debug();
 void* swap_thread(void* arg);
 void ocall_debug(const char *str);
-
+void ocall_create_background_thread();
+void ocall_pthread_destroy();
 #ifdef __cplusplus
 }
 #endif

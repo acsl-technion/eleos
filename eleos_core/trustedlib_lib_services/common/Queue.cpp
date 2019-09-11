@@ -23,6 +23,7 @@ Queue::~Queue()
 
 int Queue::enqueue(request* elem)
 {
+
 	spin_lock(&_lock);
 
 	if(rear-front == queue_size)

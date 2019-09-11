@@ -10,7 +10,7 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
-
+#include "../common/Queue.h"
 extern pthread_cond_t g_aptr_cond_var;
 extern pthread_mutex_t g_aptr_mutex;
 extern bool g_swap_thread_work;
